@@ -9,4 +9,6 @@ import { Product } from 'src/app/core/models/product.model';
 })
 export class HomeComponent {
   featuredProducts:Product[]=PRODUCTS
+
+  
 }

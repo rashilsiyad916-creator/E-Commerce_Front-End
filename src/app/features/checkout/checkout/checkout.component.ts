@@ -15,27 +15,56 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private cartService: CartService, private router: Router,private orderService:OrdersService,private toastrService:ToastrService) {}
 
-  ngOnInit() {
-    const cartItems = this.cartService.getCartItems();
-    console.log('Cart items in checkout:', cartItems);
+ngOnInit() {
+
+  const cartItems = this.cartService.getCartItems();
+
+  if (cartItems.length > 0) {
+
+    
     this.totalAmount = this.cartService.getTotal();
-    const storedAddress = localStorage.getItem('userAddress');
-    if (storedAddress) {
-      this.address = JSON.parse(storedAddress);
+
+    
+    localStorage.removeItem('buyNowProduct');
+
+  } else {
+
+    const buyNowProduct = localStorage.getItem('buyNowProduct');
+
+    if (buyNowProduct) {
+      const product = JSON.parse(buyNowProduct);
+      this.totalAmount = product.price;
     }
   }
 
-  placeOrder() {
-    if (!this.paymentMethod) {
-      alert('Please select a payment method');
-      return;
-    }
-    const items = this.cartService.getCartItems();
-    this.orderService.saveOrder(items);
-    this.toastrService.success('Order Placed Successfully')
-    this.cartService.clearCart();
-    this.router.navigate(['/orders']);
+  const storedAddress = localStorage.getItem('userAddress');
+  if (storedAddress) {
+    this.address = JSON.parse(storedAddress);
   }
+}
+placeOrder() {
+
+  const cartItems = this.cartService.getCartItems();
+
+  if (cartItems.length > 0) {
+
+    this.orderService.saveOrder(cartItems);
+    this.cartService.clearCart();
+
+  } else {
+
+    const buyNowProduct = localStorage.getItem('buyNowProduct');
+
+    if (buyNowProduct) {
+      const product = JSON.parse(buyNowProduct);
+      this.orderService.saveOrder([{ product, quantity: 1 }]);
+      localStorage.removeItem('buyNowProduct');
+    }
+  }
+
+  this.toastrService.success('Order Placed Successfully');
+  this.router.navigate(['/orders']);
+}
 }
 
 

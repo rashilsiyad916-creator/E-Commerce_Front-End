@@ -14,16 +14,15 @@ export class CartService {
   private cartItems = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItems.asObservable();
 
-  constructor() {
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
-      this.cartItems.next(JSON.parse(storedCart));
-    }
+ constructor() {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    this.cartItems.next(JSON.parse(savedCart));
   }
-
-  private updateLocalStorage(items: CartItem[]) {
-    localStorage.setItem('cart', JSON.stringify(items));
-  }
+}
+private updateLocalStorage(items: CartItem[]) {
+  localStorage.setItem('cart', JSON.stringify(items));
+}
 
   getCartItems() {
     return this.cartItems.getValue();
@@ -40,21 +39,43 @@ export class CartService {
     }
 
     this.cartItems.next([...items]);
-    this.updateLocalStorage(items); // ✅ Save to localStorage
+    this.updateLocalStorage(items); 
   }
 
   removeFromCart(id: number) {
     const updated = this.getCartItems().filter(i => i.product.id !== id);
     this.cartItems.next(updated);
-    this.updateLocalStorage(updated); // ✅ Save to localStorage
+    this.updateLocalStorage(updated); 
   }
 
   clearCart() {
     this.cartItems.next([]);
-    localStorage.removeItem('cart'); // ✅ Clear localStorage
+    localStorage.removeItem('cart'); 
   }
 
   getTotal() {
     return this.getCartItems().reduce((acc, item) => acc + item.product.price * item.quantity, 0);
   }
+
+  changeQuantity(productId: number, change: number) {
+
+  const items = this.cartItems.value;
+
+  const item = items.find(p => p.product.id === productId);
+
+  if (!item) return;
+
+  item.quantity += change;
+
+  if (item.quantity < 1) {
+    item.quantity = 1; 
+  }
+
+  this.cartItems.next([...items]);
+
+  this.updateLocalStorage(items);
+
+}
+  
+
 }

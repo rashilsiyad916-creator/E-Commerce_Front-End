@@ -6,9 +6,11 @@ import { SharedModule } from './shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { WishlistPageComponent } from './features/wishlist/pages/wishlist-page/wishlist-page.component';
 @NgModule({
   declarations: [
     AppComponent,
+    WishlistPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -60,7 +60,7 @@ export const PRODUCTS:Product[]=[
         name:'Nike Air Jordan 2',
         description:'A classic remade. Reinventing the King\'s style, the Jordan Retro 1 High OG brings a fashion-forward look to the OG sneaker that started it all. Powered by quintessential old-school design details and futuristic tech, these high-tops let you take flight with legendary style and performance. The encapsulated Air-Sole unit in the heel offers the same bouncy cushioning and comfort that MJ enjoyed in his playing days. Quality leather and an undeniable design make these shoes a go-to for those who want to be in the spotlight. Play like an icon and redefine the game like \'His Airness\' in the Jordan Retro 1 High OG.',
         price:14999,
-        imageUrl:'assets/shoes/Nike Air Jordan 2.webp',
+        imageUrl:'assets/shoes/nike jordan air4.avif',
         availableSizes:['7', '8'],
         gender:'Women'
     },
@@ -93,10 +93,10 @@ export const PRODUCTS:Product[]=[
     },
         {
         id:11,
-        name:'Nike Air Jordan 1',
+        name:'Nike joyride',
         description:'The Air Jordan 1 Mid Shoe is inspired by the first AJ1, offering fans of Jordan retros a chance to follow in the footsteps of greatness. Fresh colour trims the clean, classic materials, injecting some newness into the familiar design.',
         price:14999,
-        imageUrl:'assets/shoes/Nike Air Jordan 1.avif',
+        imageUrl:'assets/shoes/nike air3.avif',
         availableSizes:['8','9','10'],
         gender:'Men'
     },

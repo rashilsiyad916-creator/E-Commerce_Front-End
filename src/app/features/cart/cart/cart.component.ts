@@ -17,7 +17,7 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeItem(id: number) {
+  removeItem(id:number) {
     this.cartService.removeFromCart(id);
   }
 
@@ -27,6 +27,18 @@ export class CartComponent implements OnInit {
 
   goToAddress(){
     this.router.navigate(['checkout/address'])
+
   }
+  increaseQty(productId: number) {
+  this.cartService.changeQuantity(productId, +1);
+}
+
+decreaseQty(productId: number) {
+  this.cartService.changeQuantity(productId, -1);
+}
+
+
+  
+
 }
 

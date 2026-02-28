@@ -10,7 +10,7 @@ app-product-card{
 }
 .filters {
   display: flex;
-  gap: 1rem;
+  gap: 2rm;
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;

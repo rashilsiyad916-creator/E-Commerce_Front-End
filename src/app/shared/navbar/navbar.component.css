@@ -66,12 +66,105 @@ nav ul svg{
   font-size:x-large;
 }
 
-.search-wrapper{
-  background-color: #000;
-  border-color: white;
-  color: white;
+.cart-item {
+  position: relative;
+  cursor: pointer;
 }
 
-.search-wrapper::placeholder{
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  animation: pop 0.25s ease;
+
+  background: crimson;
   color: white;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  min-width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
 }
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.wishlist-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.wishlist-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+
+  background: crimson;
+  color: white;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  min-width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+}
+
+
+.search-box {
+  position: relative;
+  width: 260px;
+}
+
+
+.search-box input {
+  width: 100%;
+  padding: 8px 38px 8px 15px;
+  border-radius: 30px;
+  border: 1px solid #444;
+  background-color: #111;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: #aaa;
+}
+
+
+.search-box input:focus {
+  border-color: crimson;
+  box-shadow: 0 0 8px rgba(220, 20, 60, 0.6);
+}
+
+
+.search-box svg {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+

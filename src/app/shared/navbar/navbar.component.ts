@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PRODUCTS } from '../data/product';
+import { WishlistService } from 'src/app/core/wishlist.service';
+import { CartService } from 'src/app/core/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,11 +12,25 @@ import { PRODUCTS } from '../data/product';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   searchQuery: string = '';
+  wishlistCount: number=0;
+  cartCount:number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private wishlistService:WishlistService,private cartService:CartService) {}
 
   ngOnInit(): void {
     this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    this.wishlistService.wishlist$.subscribe(items=>{
+      this.wishlistCount=items.length;
+    });
+   
+  this.cartService.cartItems$.subscribe(items => {
+  this.cartCount = items.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+});
+
+    
   }
 
   logout() {
@@ -49,6 +65,9 @@ export class NavbarComponent implements OnInit {
       alert('Product not found');
     }
     this.searchQuery = '';
+  }
+   goToWishlist() {
+    this.router.navigate(['/wishlist']);
   }
 }
 
